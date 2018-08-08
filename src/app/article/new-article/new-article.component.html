@@ -1,0 +1,11 @@
+<div class="container grid-xl grid-lg gird-md">
+    <h2 class="text-center">Création de l'article</h2>
+    <article-form
+        [parent]="form"
+        [sections]="categories$ | async"
+        (add)="addCategory()"
+        (remove)="removeCategory($event)"
+        (submit)="createArticle($event)"
+    >
+    </article-form>
+</div>

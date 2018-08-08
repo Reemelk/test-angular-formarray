@@ -1,0 +1,20 @@
+<div class="sections-article">
+  <button class="btn btn-primary" (click)="addCategory()">Ajouter Catégorie</button>
+
+  <div *ngFor="let category of categories.controls; index as i">
+    <div [formGroup]="category">
+      <select class="form-select select-sm" formControlName="id" (change)="selectedCategory(i)">
+        <option *ngFor="let c of sections" [value]="c.id">{{ c.name }}</option>
+      </select>
+      <div *ngIf="!!categoryId">
+        <div *ngFor="let subs of (sections | filterSubs: categoryId)">
+          <label class="form-checkbox form-inline" *ngFor="let s of subs">
+            <input type="checkbox" [value]="s.id">
+            <i class="form-icon"></i> {{ s.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

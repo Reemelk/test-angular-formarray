@@ -1,0 +1,29 @@
+<form [formGroup]="parent" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label class="form-label" for="input-example-1">Titre</label>
+    <input class="form-input" type="text" formControlName="title" placeholder="Titre">
+
+    <div class="content-preview">
+      <h3>Aperçu de l'article</h3>
+      <div [froalaView]="parent.content"></div>
+    </div>
+
+    <div class="content">
+      <textarea [froalaEditor] formControlName="content" [(froalaModel)]="parent.content"></textarea>
+    </div>
+
+    <br>
+
+    <article-relationship 
+      [categories]="parent.get('categories')"
+      [sections]="sections"
+      (add)="onAddCategory($event)"
+    >
+    </article-relationship>
+    
+  </div>
+
+  <button class="btn btn-success" [disabled]="false">Poster l'article</button>
+</form>
+<br>
+{{ parent.value | json }}
