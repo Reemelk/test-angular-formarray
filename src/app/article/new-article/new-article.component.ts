@@ -1,12 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { filter, map} from 'rxjs/operators';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-
-import { Category, Subcategory } from '../../graphql/types/article.type';
 
 const CategoriesWithSubcategories = gql`
   query Sections {
@@ -24,8 +21,7 @@ const CategoriesWithSubcategories = gql`
 @Component({
   selector: 'new-article',
   templateUrl: './new-article.component.html',
-  styleUrls: ['./new-article.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./new-article.component.css']
 })
 export class NewArticleComponent implements OnInit {
   form: FormGroup;
@@ -45,9 +41,9 @@ export class NewArticleComponent implements OnInit {
       id: 2,
       name: 'Sport',
       subcategories: [
-        { id: 1, name: 'Football' },
-        { id: 2, name: 'Rugby' },
-        { id: 3, name: 'Handball' }
+        { id: 4, name: 'Football' },
+        { id: 5, name: 'Rugby' },
+        { id: 6, name: 'Handball' }
       ]
     }
   ]);
@@ -66,23 +62,8 @@ export class NewArticleComponent implements OnInit {
     this.categories.push(this.createCategory());
   }
 
-  addSubcategories(index: number): void {
-    this.subs$ = of([]);
-    this.categories$.pipe(filter(c => c.id == index)).subscribe(c => console.log(c));
-    this.categories$.pipe(
-                        filter(c => c.id == index),
-                        map(c => c.subcategories)
-                      );
-    this.subs$ = of([
-      { id: 1, name: 'Trap' },
-      { id: 2, name: 'Pop Urbaine' },
-      { id: 3, name: 'R\'n\'B' }
-    ])
-  }
-
   removeCategory(index: number): void {
-    console.log(index);
-    // this.categories.removeAt(index);
+    this.categories.removeAt(index);
   }
 
   createArticle(article: FormGroup) {

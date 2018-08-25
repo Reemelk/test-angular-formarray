@@ -18,7 +18,8 @@
       [categories]="parent.get('categories')"
       [sections]="sections"
       (add)="onAddCategory($event)"
-    >
+      (remove)="onRemoveCategory($event)"
+      >
     </article-relationship>
     
   </div>

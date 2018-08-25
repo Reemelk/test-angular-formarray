@@ -1,20 +1,43 @@
 <div class="sections-article">
   <button class="btn btn-primary" (click)="addCategory()">Ajouter Catégorie</button>
-
+  <br>
+  <br>
   <div *ngFor="let category of categories.controls; index as i">
     <div [formGroup]="category">
-      <select class="form-select select-sm" formControlName="id" (change)="selectedCategory(i)">
+      <select class="form-select select-sm" formControlName="id">
         <option *ngFor="let c of sections" [value]="c.id">{{ c.name }}</option>
       </select>
-      <div *ngIf="!!categoryId">
-        <div *ngFor="let subs of (sections | filterSubs: categoryId)">
+
+      <div class="subcategories">
+        <div *ngFor="let subs of (sections | filterSubs: categories.controls[i].value.id)">
           <label class="form-checkbox form-inline" *ngFor="let s of subs">
-            <input type="checkbox" [value]="s.id">
+            <input type="checkbox" (change)="checkedSubs(i, s.id)">
             <i class="form-icon"></i> {{ s.name }}
           </label>
         </div>
+      </div>
+
+      <div class="delete-btn">
+        <button
+          class="btn btn-error btn-sm centered" 
+          (click)="removeCategory(i)"
+          [disabled]="categoriesLength()"
+        >
+          Supprimer catégorie
+        </button>
       </div>
     </div>
     <br>
   </div>
 </div>
+
+
+<!-- <div *ngIf="!!categoryId">
+                <div *ngFor="let subs of (sections | filterSubs: categoryId)">
+                  <label class="form-checkbox form-inline" 
+                                    *ngFor="let s of subs">
+                    <input type="checkbox" [value]="s.id">
+                    <i class="form-icon"></i> {{ s.name }}
+                  </label>
+                </div>
+              </div> -->

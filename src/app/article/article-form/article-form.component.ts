@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'article-form',
   templateUrl: './article-form.component.html',
-  styleUrls: ['./article-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./article-form.component.css']
 })
 export class ArticleFormComponent implements OnInit {
   @Input() parent: FormGroup;
@@ -20,7 +19,7 @@ export class ArticleFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(event): void {
+  onSubmit(): void {
     this.submit.emit(this.parent);
   }
 

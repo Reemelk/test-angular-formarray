@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterSubs'
+  name: 'filterSubs',
+  pure: false
 })
 export class FilterSubcategoriesPipe implements PipeTransform {
   transform(categories: any[], categoryId: number): any {
